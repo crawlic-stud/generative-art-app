@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Generate!
+{% endblock %}
+
+{% block body %}
+
+<canvas id="canvas"></canvas>
+<button type="button" class="main-btn" onclick="drawImage()">Generate!</button>
+
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/colors.js"></script>
+<script src="/static/js/bezier.js"></script>
+<script src="/static/js/canvas.js"></script>
+{% endblock %}
