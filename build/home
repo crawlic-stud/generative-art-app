@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+        
+Generate!
+
+    </title>
+    <link rel="stylesheet" href="/static/css/site.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="/static/lib/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</head>
+  <body>
+    <div class="header">
+    </div>
+  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <li><a>Image settings</a></li>
+      <li>
+        <label for="mainWidthSlider"><span>Main width</span></label>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="range" id="mainWidthSlider" value="0.4" min="0" max="5" step="0.1" oninput="mainWidthValue.value=value">
+          </div>
+          <div class="col-md-4 offset-md-1">
+            <input type="number" id="mainWidthValue" value="0.4" step="0.1" oninput="mainWidthSlider.value=value"/>
+          </div>
+        </div>
+
+        <label for="secondaryWidthSlider"><span>Secondary width</span></label>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="range" id="secondaryWidthSlider" value="0.05" step="0.05" min="0" max="5" oninput="secondaryWidthValue.value=value">
+          </div>
+          <div class="col-md-4 offset-md-1">
+            <input type="number" id="secondaryWidthValue" value="0.05" step="0.05" oninput="secondaryWidthSlider.value=value"/>
+          </div>
+        </div>
+      </li>
+      <li>
+          <label for="cyclesSlider"><span>Cycles</span></label>
+          <div class="row">
+            <div class="col-md-6">
+          <input type="range" id="cyclesSlider" value="10" min="0" max="100" step="1" oninput="cyclesValue.value=value">
+
+            </div>
+            <div class="col-md-4 offset-md-1">
+          <input type="number" id="cyclesValue" value="10" min="0" step="1" oninput="cyclesSlider.value=value"/>
+
+            </div>
+          </div>
+          
+          <label for="anglesSlider"><span>Angles</span></label>
+          <div class="row">
+            <div class="col-md-6">
+          <input type="range" id="anglesSlider" value="5" min="0" max="100" step="1" oninput="anglesValue.value=value">
+
+            </div>
+            <div class="col-md-4 offset-md-1">
+          <input type="number" id="anglesValue" value="5" min="0" step="1" oninput="anglesSlider.value=value"/>
+
+            </div>
+          </div>
+          
+          <label for="accuracySlider"><span>Accuracy</span></label>
+          <div class="row">
+            <div class="col-md-6">
+          <input type="range" id="accuracySlider" value="0.001" min="0" max="0.1" step="0.001" oninput="accuracyValue.value=value">
+
+            </div>
+            <div class="col-md-4 offset-md-1">
+          <input type="number" id="accuracyValue" value="0.001" min="0" step="0.001" oninput="accuracySlider.value=value"/>
+
+            </div>
+          </div>
+        
+          <label class="form-check-label" for="linesSlider"><span>Lines</span></label>
+          <div class="row">
+            <div class="col-md-6">
+          <input type="range" id="linesSlider" value="400" min="0" max="1000" step="1" oninput="linesValue.value=value">
+
+            </div>
+            <div class="col-md-4 offset-md-1">
+          <input type="number" id="linesValue" value="400" min="0" step="1" oninput="linesSlider.value=value"/>
+
+            </div>
+          </div>
+      
+      </li>
+      <li>
+        <div class="form-check form-switch">
+          <label class="form-check-label" for="animationCheckbox"><span>Animation</span></label>
+          <input class="form-check-input" type="checkbox" class="switch" id="animationCheckbox" checked>
+        </div>
+          <label for="speedSlider"><span>Speed</span></label>
+          <div class="row">
+            <div class="col-md-6">
+          <input type="range" id="speedSlider" value="10" min="1" max="100" step="1" oninput="speedValue.value=value">
+
+            </div>
+            <div class="col-md-4 offset-md-1">
+          <input type="number" id="speedValue" value="10" min="1" step="1" oninput="speedSlider.value=value"/>
+
+            </div>
+          </div>
+        </li>
+      <li>
+        <div class="form-check form-switch">
+          <label class="form-check-label" for="centeredCheckbox"><span>Centered</span></label>
+          <input class="form-check-input" type="checkbox" class="switch" id="centeredCheckbox" checked>
+
+          <label class="form-check-label" for="changeColorCheckbox"><span>Change color</span></label>
+          <input class="form-check-input" type="checkbox" class="switch" id="changeColorCheckbox" checked>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id='center' class="main center">
+    <div class="mainInner">
+        
+
+<canvas id="canvas"></canvas>
+<button type="button" class="main-btn" onclick="drawImage()">Generate!</button>
+
+<script src="/static/js/utils.js"></script>
+<script src="/static/js/colors.js"></script>
+<script src="/static/js/bezier.js"></script>
+<script src="/static/js/canvas.js"></script>
+
+    </div>
+  </div> 
+</body>
+</html>
