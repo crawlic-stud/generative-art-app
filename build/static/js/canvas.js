@@ -1,15 +1,19 @@
-
-
 const delay = async t => new Promise(r => setTimeout(r, t));
 
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-}
 resizeCanvas();
+
+function resizeCanvas(scale=4) {
+    canvas.height = window.innerHeight * scale;
+    canvas.width = window.innerWidth * scale;
+
+    canvas.style.height = window.innerHeight + "px";
+    canvas.style.width = window.innerWidth + "px";
+    //ctx.scale(1 / scale, 1 / scale);
+}
+
 
 function clearCanvas() {
     resizeCanvas();
@@ -21,7 +25,6 @@ function clearCanvas() {
 }
 
 async function drawImage() {
-
     function drawLine(start, end, color='#3370d4', width=1) {
         if (width <= 0) return;
         ctx.strokeStyle = color;
@@ -33,8 +36,8 @@ async function drawImage() {
         ctx.closePath();
         ctx.stroke();
     }
-
-    const maxSize = Math.min(window.innerHeight, window.innerWidth);
+    
+    const maxSize = Math.min(canvas.width, canvas.height);
     const randomPoint = () => [Math.random() * maxSize, Math.random() * maxSize];
 
     const mainWidth = parseFloat(document.querySelector("#mainWidthValue").value);
@@ -67,7 +70,7 @@ async function drawImage() {
 
         let curve = new Curve(accuracy, points);
         if (centered) {
-            curve.points = offsetToCenter(curve.points);
+            curve.points = offsetToCenter(curve.points, canvas.width, canvas.height);
         }
         for (let i = 0; i < curve.points.length - 1; i++) {
             drawLine(curve.points[i], curve.points[i+1], color, mainWidth);
@@ -84,41 +87,4 @@ async function drawImage() {
             if (animation && k % speed == 0) await delay(millisecDelay);
         }
     }
-}
-
-function drawPolygon(points, color='#3370d4') {
-    ctx.fillStyle = color;
-    ctx.moveTo(points[0][0], points[0][1]);
-    ctx.beginPath();
-    for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i][0], points[i][1]);
-    }
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawCircle(x, y, radius, color='#3370d4'){
-    ctx.strokeStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
-    ctx.closePath();
-    ctx.stroke();
-}
-
-async function drawBezierCircle(accuracy, points, color='#3370d4', radius=10, centered = true) {
-    let curve = new Curve(accuracy, points);
-    for (let i = 0; i < curve.points.length; i++) {
-        drawCircle(curve.points[i][0], curve.points[i][1], radius, color);
-        await delay(millisecDelay);
-    }
-    return curve.points;
-}
-
-async function drawBezierPolygon(accuracy, points, color='#3370d4', centered = true) {
-    let curve = new Curve(accuracy, points);
-    for (let i = 0; i < curve.points.length - 1; i++) {
-        drawPolygon(curve.points, color);
-        await delay(millisecDelay);
-    }
-    return curve.points;
 }
