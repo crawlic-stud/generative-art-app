@@ -45,8 +45,4 @@ function range(start, stop, step) {
     return rangeArray;
 }
 
-function saveImage(name="untitled") {
-    let download = document.getElementById('download');
-    download.setAttribute('download', `${name}.png`);
-    download.setAttribute('href', canvas.toDataURL("image/png"));
-}
+

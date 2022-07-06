@@ -32,14 +32,14 @@ def main():
     
     # if pushing to prod
     elif len(sys.argv) > 1 and sys.argv[1] == "push":
-        cmd("git add .")
-        cmd("git commit -m \"build commit\"")
-        cmd("git push origin master")
         cmd("git checkout prod")
         cmd("git add ./build/")
         cmd("git commit -m \"build commit\"")
         cmd("git push origin prod")
         cmd("git checkout master")
+        cmd("git add .")
+        cmd("git commit -m \"build commit\"")
+        cmd("git push origin master")
 
     # if developing
     else:
