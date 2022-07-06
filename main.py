@@ -29,6 +29,9 @@ def main():
         static_html = index_path.read_text()
         new_html = static_html.replace("/static", f"/{current_dir.name}/static")
         index_path.write_text(new_html)
+
+        cmd("copy \".\"\\build\\index.html \".\"")
+        cmd("rd /s /q build")
     
     # if pushing to prod
     elif len(sys.argv) > 1 and sys.argv[1] == "push":
