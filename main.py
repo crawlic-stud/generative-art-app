@@ -22,14 +22,18 @@ def cmd(command):
 def main():
     # if building to static site
     if len(sys.argv) > 1 and sys.argv[1] == "build":
+
+        # freezing flask app to static build
         freezer.freeze()
         
+        # replace static links to js and css in order to work with GitHub Pages
         current_dir = pathlib.Path(__file__).parent
         index_path = pathlib.Path(current_dir / "build" / "index.html")
         static_html = index_path.read_text()
         new_html = static_html.replace("/static", f"/{current_dir.name}/static")
         index_path.write_text(new_html)
 
+        # move static index.html to root and remove redundant build directory
         cmd("copy \".\"\\build\\index.html \".\"")
         cmd("rd /s /q build")
     
