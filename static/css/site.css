@@ -159,6 +159,8 @@ body {
 #canvas {
     background: var(--bg-color);
     z-index: -1;
+    display: block;
+    margin: 0 auto;
 }
 
 /* BUTTONS */
