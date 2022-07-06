@@ -5,10 +5,9 @@ const ctx = canvas.getContext('2d');
 
 resizeCanvas();
 
-function resizeCanvas(scale=4) {
-    canvas.height = window.innerHeight * scale;
-    canvas.width = window.innerWidth * scale;
-
+function resizeCanvas(scale=2) {
+    canvas.height = window.innerHeight * scale * window.devicePixelRatio;
+    canvas.width = window.innerWidth * scale * window.devicePixelRatio;
     canvas.style.height = window.innerHeight + "px";
     canvas.style.width = window.innerWidth + "px";
     //ctx.scale(1 / scale, 1 / scale);
@@ -23,6 +22,14 @@ function clearCanvas() {
         window.clearTimeout(maxId);
     }
 }
+
+
+function saveImage(name="untitled") {
+    let download = document.getElementById('download');
+    download.setAttribute('download', `${name}.png`);
+    download.setAttribute('href', canvas.toDataURL("image/png"));
+}
+
 
 async function drawImage() {
     function drawLine(start, end, color='#3370d4', width=1) {
